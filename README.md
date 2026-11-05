@@ -2,6 +2,12 @@
 
 Express service that accepts signed KYC webhooks, updates investor status asynchronously, and serves a tenant-scoped status read.
 
+## Rough System Design
+
+Rough system design sketched by me before implementation to give the AI clear context on the expected webhook, idempotency, and worker flow:
+
+![Rough system design for the KYC webhook flow](docs/webhook-flow-rough-design.png)
+
 ## Requirements
 
 - Node.js 20+
@@ -70,12 +76,6 @@ npm test
 ```
 
 Step-by-step requests for the webhook and the status read are in [docs/RUN_AND_TEST.md](docs/RUN_AND_TEST.md).
-
-## Rough System Design
-
-Rough system design sketched by me before implementation to give the AI clear context on the expected webhook, idempotency, and worker flow:
-
-![Rough system design for the KYC webhook flow](docs/webhook-flow-rough-design.png)
 
 ## Write-ups
 
