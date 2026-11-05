@@ -1,0 +1,38 @@
+{
+  "name": "kyc-webhook-service",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Idempotent KYC webhook intake and tenant-scoped status reads.",
+  "scripts": {
+    "dev": "bash scripts/dev.sh",
+    "start": "tsx src/index.ts",
+    "test": "tsx --test --test-concurrency=1 test/kyc.test.ts",
+    "token": "tsx scripts/sign-jwt.ts",
+    "postinstall": "prisma generate"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "bullmq": "^5.81.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.3",
+    "ioredis": "^5.11.1",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.25",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.20.5",
+    "@types/supertest": "^6.0.3",
+    "prisma": "^6.19.3",
+    "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  }
+}

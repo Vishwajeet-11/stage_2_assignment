@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id        String     @id @default(uuid())
+  name      String
+  investors Investor[]
+}
+
+model Investor {
+  id            String         @id @default(uuid())
+  tenant_id     String
+  email         String         @unique
+  kyc_status    String         @default("pending")
+  tenant        Tenant         @relation(fields: [tenant_id], references: [id])
+  webhookEvents WebhookEvent[]
+}
+
+model WebhookEvent {
+  id          String   @id @default(uuid())
+  eventId     String   @unique @map("event_id")
+  provider    String
+  payload     Json
+  processedAt DateTime @default(now()) @map("processed_at")
+  investorId  String   @map("investor_id")
+  investor    Investor @relation(fields: [investorId], references: [id])
+
+  @@index([investorId, processedAt])
+}
